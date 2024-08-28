@@ -1,0 +1,12 @@
+body {
+    font-family: system-ui;
+    background-color: lightsteelblue;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-box {
+    margin: 2px;
+    margin-right: 20px;
+    padding: 5px;
+}
