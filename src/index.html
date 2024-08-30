@@ -10,14 +10,16 @@
 </head>
 
 <body>
-    <div>
+    <div id="inputContainer">
         <h2>Lift Simulation</h2>
         <label>Number of floors:-</label>
-        <input class="input-box" id="floors-input" type="number" min="2" required>
+        <input class="input-box" id="floors-input" type="number" min="2" value="4" required>
         <label>Number of lifts:-</label>
-        <input class="input-box" id="lifts-input" type="number" min="1" required>
+        <input class="input-box" id="lifts-input" type="number" min="1" value="3" required>
         <button id="generate">Generate</button>
     </div>
+
+    <div id="floor-container"></div>
     <script src="js/main.js"></script>
 </body>
 

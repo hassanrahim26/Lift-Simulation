@@ -6,7 +6,51 @@ body {
 }
 
 .input-box {
-    margin: 2px;
+    margin-bottom: 50px;
     margin-right: 20px;
     padding: 5px;
+}
+
+.floor-line {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+    min-width: 10000px;
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #000;
+    margin: 0px 20px;
+    overflow-x: auto;
+}
+
+.floor-info {
+    margin-right: 20px;
+    text-align: left;
+}
+
+.lifts-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    position: absolute;
+    top: -85px;
+    left: 150px;
+}
+
+.lift {
+    width: 60px;
+    height: 100px;
+    margin-left: 30px;
+    background-color: grey;
+    border: 2px solid black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
