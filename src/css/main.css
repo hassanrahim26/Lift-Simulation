@@ -6,19 +6,33 @@ body {
 }
 
 .input-box {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-right: 20px;
     padding: 5px;
+}
+
+#generate {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#generate:hover {
+    background-color: #0056b3;
 }
 
 .floor-line {
     display: flex;
     align-items: center;
-    margin-top: 100px;
-    justify-content: space-between;
+    margin-top: 80px;
+    justify-content: flex-start;
     padding: 10px;
     position: relative;
-    min-width: 10000px;
+    min-width: max-content;
 }
 
 .line {
@@ -30,8 +44,36 @@ body {
 }
 
 .floor-info {
-    margin-right: 20px;
+    margin-right: 10px;
     text-align: left;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 5px;
+    margin-right: 20px; 
+    margin-bottom: 0px;
+    align-items: center; 
+}
+
+.button {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 50px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 .lifts-container {
@@ -39,18 +81,61 @@ body {
     gap: 10px;
     justify-content: flex-start;
     position: absolute;
-    top: -85px;
-    left: 150px;
+    top: -83px;
+    left: 200px;
 }
 
 .lift {
     width: 60px;
     height: 100px;
-    margin-left: 30px;
+    margin-left: 20px;
     background-color: grey;
     border: 2px solid black;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    transition: transform 0.5s linear;
+    overflow: hidden;
+}
+
+.lift-door {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #444;
+    transition: transform 2.5s ease;
+}
+
+.lift-door.left {
+    left: 0;
+    transform-origin: left;
+}
+
+.lift-door.right {
+    right: 0;
+    transform-origin: right;
+}
+
+@media (max-width: 100px) {
+    .input-box {
+        margin-right: 0;
+    }
+
+    .floor-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .button-container {
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+
+    .lift {
+        width: 50px;
+        height: 80px;
+        margin-left: 10px;
+    }
 }
