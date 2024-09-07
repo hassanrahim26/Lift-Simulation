@@ -14,12 +14,8 @@ generateButton.addEventListener('click', function () {
         alert('Enter the values for floors and lifts');
         return;
     }
-    if(no_of_floors === 0 && no_of_lifts === 0){
-        alert('Number of floors and lifts should be greater than 1');
-        return;
-    }
-    if (no_of_floors <= 1 || !no_of_floors) {
-        alert('Number of floors should be greater than 1');
+    if (no_of_floors < 1 || !no_of_floors) {
+        alert('Number of floors should be greater than 0');
         return;
     }
     if (no_of_lifts < 1 || !no_of_lifts) {
@@ -37,7 +33,7 @@ function createFloors(no_of_floors, no_of_lifts) {
     const totalWidth = 300 + (no_of_lifts * 100);
     floorContainer.style.width = `${totalWidth}px`;
 
-    for (let i = no_of_floors; i >= 0; i--) {
+    for (let i = no_of_floors; i >= 1; i--) {
         const floorLine = document.createElement('div');
         floorLine.className = 'floor-line';
         floorLine.style.height = '50px'; 
@@ -45,7 +41,7 @@ function createFloors(no_of_floors, no_of_lifts) {
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'button-container';
 
-        if (i !== no_of_floors) {
+        if (i === 1 || (no_of_floors > 1 && i < no_of_floors)) {
             const upButton = document.createElement('button');
             upButton.className = 'button up-button';
             upButton.textContent = 'Up';
@@ -53,7 +49,7 @@ function createFloors(no_of_floors, no_of_lifts) {
             buttonContainer.appendChild(upButton);
         }
 
-        if (i !== 0) {
+        if (i > 1) {
             const downButton = document.createElement('button');
             downButton.className = 'button down-button';
             downButton.textContent = 'Down';
@@ -96,7 +92,7 @@ function createLifts(no_of_lifts) {
         liftsContainer.appendChild(lift);
         lifts.push({ 
             element: lift, 
-            currentFloor: 0, 
+            currentFloor: 1, 
             isMoving: false,
             destinationFloor: null,
             direction: null
@@ -106,10 +102,15 @@ function createLifts(no_of_lifts) {
 }
 
 function requestLift(floorNum, direction) {
-    const button = floorContainer.children[floorContainer.children.length - 1 - floorNum]
-        .querySelector(`.${direction}-button`);
-    button.disabled = true;
+    const floorIndex = floorContainer.children.length - floorNum;
+    const floorElement = floorContainer.children[floorIndex];
 
+    if(floorElement){
+        const button = floorElement.querySelector(`.${direction}-button`);
+        if(button) {
+            button.disabled = true;
+        }
+    }
     liftRequests.push({ floor: floorNum, direction });
     processLiftRequests();
 }
@@ -123,9 +124,14 @@ function processLiftRequests() {
     if (availableLift) {
         liftRequests.shift();
         moveLift(availableLift, request.floor, request.direction).then(() => {
-            const button = floorContainer.children[floorContainer.children.length - 1 - request.floor]
-                .querySelector(`.${request.direction}-button`);
-            button.disabled = false;
+            const floorIndex = floorContainer.children.length - request.floor;
+            const floorElement = floorContainer.children[floorIndex];
+            if (floorElement) {
+                const button = floorElement.querySelector(`.${request.direction}-button`);
+                if (button) {
+                    button.disabled = false;
+                }
+            }
             processLiftRequests();
         });
     }
@@ -157,7 +163,7 @@ function moveLift(lift, targetFloor, direction) {
 
     return new Promise(resolve => {
         lift.element.style.transition = `transform ${duration}s linear`;
-        lift.element.style.transform = `translateY(-${targetFloor * floorHeight}px)`;
+        lift.element.style.transform = `translateY(-${(targetFloor - 1) * floorHeight}px)`;
 
         setTimeout(() => {
             operateLiftDoors(lift).then(() => {
