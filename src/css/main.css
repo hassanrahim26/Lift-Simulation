@@ -25,6 +25,10 @@ body {
     background-color: #0056b3;
 }
 
+#floor-container {
+    padding-top: 100px;
+}
+
 .floor-line {
     display: flex;
     align-items: center;
@@ -81,7 +85,7 @@ body {
     gap: 10px;
     justify-content: flex-start;
     position: absolute;
-    top: -83px;
+    top: -90px;
     left: 200px;
 }
 

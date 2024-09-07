@@ -14,6 +14,10 @@ generateButton.addEventListener('click', function () {
         alert('Enter the values for floors and lifts');
         return;
     }
+    if(no_of_floors === 0 && no_of_lifts === 0){
+        alert('Number of floors and lifts should be greater than 1');
+        return;
+    }
     if (no_of_floors <= 1 || !no_of_floors) {
         alert('Number of floors should be greater than 1');
         return;
@@ -36,6 +40,7 @@ function createFloors(no_of_floors, no_of_lifts) {
     for (let i = no_of_floors; i >= 0; i--) {
         const floorLine = document.createElement('div');
         floorLine.className = 'floor-line';
+        floorLine.style.height = '50px'; 
 
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'button-container';
@@ -146,7 +151,7 @@ function moveLift(lift, targetFloor, direction) {
     lift.isMoving = true;
     lift.destinationFloor = targetFloor;
     lift.direction = direction;
-    const floorHeight = 140; 
+    const floorHeight = 150; 
     const distance = Math.abs(targetFloor - lift.currentFloor);
     const duration = distance * 2;
 
