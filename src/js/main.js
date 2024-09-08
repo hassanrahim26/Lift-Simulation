@@ -6,19 +6,26 @@ const floorContainer = document.getElementById('floor-container');
 let lifts = [];
 let liftRequests = [];
 
+floorsInput.addEventListener('input', function(){
+    this.value = this.value.replace(/[^0-9]/g, '');
+})
+liftsInput.addEventListener('input', function(){
+    this.value = this.value.replace(/[^0-9]/g, '');
+})
+
 generateButton.addEventListener('click', function () {
     const no_of_floors = parseInt(floorsInput.value);
     const no_of_lifts = parseInt(liftsInput.value);
 
-    if (!no_of_floors && !no_of_lifts) {
-        alert('Enter the values for floors and lifts');
+    if (isNaN(no_of_floors) || isNaN(no_of_lifts)) {
+        alert('Floors or Lifts must be a number greater than 0');
         return;
     }
-    if (no_of_floors < 1 || !no_of_floors) {
+    else if (no_of_floors < 1) {
         alert('Number of floors should be greater than 0');
         return;
     }
-    if (no_of_lifts < 1 || !no_of_lifts) {
+    else if (no_of_lifts < 1) {
         alert('Number of lifts should be greater than 0');
         return;
     }
@@ -193,3 +200,9 @@ function operateLiftDoors(lift) {
         }, 2500);
     });
 }
+
+function clearInputs() {
+    floorsInput.value = '';
+    liftsInput.value = '';
+}
+clearInputs();
