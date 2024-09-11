@@ -147,12 +147,15 @@ function processLiftRequests() {
 function findNearestIdleLift(targetFloor) {
     let nearestLift = null;
     let minDistance = Infinity;
+    let minFloor = Infinity;
 
     for (let lift of lifts) {
         if (!lift.isMoving) {
             const distance = Math.abs(targetFloor - lift.currentFloor);
-            if (distance < minDistance) {
+            if (distance < minDistance || 
+                (distance === minDistance && lift.currentFloor < minFloor)) {
                 minDistance = distance;
+                minFloor = lift.currentFloor;
                 nearestLift = lift;
             }
         }
